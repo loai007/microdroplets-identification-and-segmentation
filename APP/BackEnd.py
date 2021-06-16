@@ -1200,7 +1200,10 @@ class WorkerThread(QtCore.QThread):
             imgwidth, imgheight = img.shape
             number_of_patches = (imgheight / BATCH_HIGHT) * (imgheight / BATCH_HIGHT)
             counter = 1
-            segmintated = np.zeros((imgheight, imgwidth), dtype=np.uint8)
+            if self.msg == "segmentation":
+                segmintated = np.zeros((imgheight, imgwidth), dtype=np.uint8)
+            else:
+                segmintated = np.zeros((imgheight, imgwidth), dtype=np.float32)
             indexheight = imgheight
             indexwidth = imgwidth
             for i in tqdm(range(0, indexheight , BATCH_HIGHT)):
